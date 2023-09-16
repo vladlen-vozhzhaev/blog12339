@@ -1,0 +1,31 @@
+<div class="container my-3">
+    <div class="row">
+        <div class="col-sm-3 text-center">
+            <img width="90%" id="avatar" src="" alt="">
+            <form action="/uploadUserAvatar" method="post" enctype="multipart/form-data">
+                <input type="file" name="userAvatar">
+                <input type="submit" value="Загрузить">
+            </form>
+        </div>
+        <div class="col-sm-9">
+            <p><strong>Имя: </strong><span id="name"></span></p>
+            <p><strong>Фамилия: </strong><span id="lastname"></span></p>
+            <p><strong>E-mail: </strong><span id="email"></span></p>
+        </div>
+    </div>
+</div>
+<script>
+    let name = document.getElementById('name');
+    let lastname = document.getElementById('lastname');
+    let email = document.getElementById('email');
+    let avatar = document.getElementById('avatar');
+    fetch('/getCurrentUser')
+        .then(function (response){return response.json()})
+        .then(function (result){
+            console.log(result);
+            name.innerText = result.name;
+            lastname.innerText = result.lastname;
+            email.innerText = result.email;
+            avatar.src = result.avatar;
+        })
+</script>

@@ -1,0 +1,21 @@
+<div class="container" id="mainContainer">
+
+</div>
+<script>
+    let mainContainer = document.getElementById('mainContainer');
+    fetch('php/handlerGetArticles.php')
+        .then(function (response){return response.json()})
+        .then(function (result){
+        console.log(result);
+        for (let i = 0; i < result.length; i++) {
+            mainContainer.innerHTML += `
+                <h3>
+                    <a href="/blog/${result[i].id}">${result[i].title}</a>
+                </h3>
+                <div>${result[i].content}</div>
+                <p>Автор: ${result[i].author}</p>
+                <hr>
+            `;
+        }
+    })
+</script>
