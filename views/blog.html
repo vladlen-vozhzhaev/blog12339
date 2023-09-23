@@ -1,0 +1,31 @@
+<div class="container my-3">
+    <h1 id="title"></h1>
+    <div id="article"></div>
+    <p class="my-3">
+        Автор: <span id="author"></span>
+        <a class="ms-5 text-danger" id="deleteBtn" href="">[удалить]</a>
+        <a class="ms-3" href="" id="editArticleBtn">[редактировать]</a>
+    </p>
+
+</div>
+<script>
+    let title = document.getElementById('title');
+    let article = document.getElementById('article');
+    let author = document.getElementById('author');
+    let deleteBtn = document.getElementById('deleteBtn');
+    let articleId = location.pathname.split('/')[2];
+    let editArticleBtn = document.getElementById("editArticleBtn");
+    deleteBtn.href = '/deleteArticle/'+articleId;
+    editArticleBtn.href = '/editArticle/'+articleId;
+    let formData = new FormData();
+    formData.append('id', articleId);
+    fetch('/getArticle', {
+        method: 'POST',
+        body: formData
+    }).then(function (response){return response.json()})
+        .then(function (result){
+            title.innerText = result.title;
+            article.innerText = result.content;
+            author.innerText = result.author;
+        })
+</script>

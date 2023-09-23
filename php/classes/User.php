@@ -53,4 +53,9 @@
             $_SESSION['avatar'] = "/$path";
             header('Location: /profile');
         }
+        public static function logout(){
+            session_start();
+            session_destroy();
+            header('Location: /login');
+        }
     }

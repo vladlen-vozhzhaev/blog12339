@@ -3,7 +3,7 @@
 </div>
 <script>
     let mainContainer = document.getElementById('mainContainer');
-    fetch('php/handlerGetArticles.php')
+    fetch('/getArticles')
         .then(function (response){return response.json()})
         .then(function (result){
         console.log(result);

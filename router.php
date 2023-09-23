@@ -1,6 +1,7 @@
 <?php
     session_start();
     $path = $_SERVER['REQUEST_URI'];
+    $pathArr = explode("/", $path); // Делим по слешу и получаем массив
     $method = $_SERVER['REQUEST_METHOD'];
     $mysqli = new mysqli('127.0.0.1', 'root', '',  'blog12339');
     require_once('php/classes/User.php');
@@ -26,5 +27,19 @@
         $content = file_get_contents('views/addArticle.html');
     }else if($path == '/addArticle' && $method == 'POST'){
         exit(Blog::addArticle());
+    }else if($path == '/getArticles'){
+        exit(Blog::getArticles());
+    }else if($path == '/logout'){
+        exit(User::logout());
+    }else if($pathArr[1] == 'blog' && $method == "GET"){
+        $content = file_get_contents('views/blog.html');
+    }else if($path == '/getArticle' && $method == "POST"){
+        exit(Blog::getArticle());
+    }else if($pathArr[1] == 'deleteArticle'){ // $pathArr = ['/', 'deleteArticle', '2'];
+        exit(Blog::deleteArticle($pathArr[2]));
+    }else if($pathArr[1] == 'editArticle' && $method == 'GET'){
+        $content = file_get_contents('views/editArticle.html');
+    }else if($pathArr[1] == 'editArticle' && $method == 'POST'){
+        exit(Blog::editArticle($pathArr[2]));
     }
     require_once 'views/template.php';

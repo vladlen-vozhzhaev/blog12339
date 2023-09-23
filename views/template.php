@@ -27,7 +27,7 @@
                     </ul>
                     <? if(!empty($_SESSION['id'])): ?>
                         <a href="/profile" class="btn btn-success me-3">Профиль</a>
-                        <a href="/php/logout.php" class="btn btn-success">Выход</a>
+                        <a href="/logout" class="btn btn-success">Выход</a>
                     <? else: ?>
                         <a href="/reg" class="btn btn-success me-3">Регистрация</a>
                         <a href="/login" class="btn btn-success">Вход</a>
